@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Poudre d'Ube Premium – BioPrestige</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="asset/icone/logo1.png" type="image/icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.7/dist/hls.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Cormorant Garamond', 'serif'],
+            body: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            plum: {
+              50: '#f9f0ff', 100: '#f0d9ff', 200: '#ddb3ff',
+              400: '#a855f7', 500: '#9333ea', 600: '#7c21cc',
+              700: '#6519a8', 800: '#4c1282', 900: '#2e0659',
+            },
+            cream: '#fdf8f2',
+            gold: '#c9a455',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body>
+
+  <!-- ── ANNOUNCEMENT BAR ───────────────────────────────────────────────── -->
+  <div class="bg-plum-900 text-white text-sm py-2">
+    <div class="ticker-wrap">
+      <div class="ticker-content">
+        <span class="mx-8">🚚 Livraison Gratuite partout à Dakar</span>
+        <span class="mx-8">🎁 1 Acheté = 1 Offert — Promo Tabaski</span>
+        <span class="mx-8">💳 Paiement à la livraison</span>
+        <span class="mx-8">⭐ +1980 avis clients satisfaits</span>
+        <span class="mx-8">🚚 Livraison Gratuite partout à Dakar</span>
+        <span class="mx-8">🎁 1 Acheté = 1 Offert — Promo Tabaski</span>
+        <span class="mx-8">💳 Paiement à la livraison</span>
+        <span class="mx-8">⭐ +1980 avis clients satisfaits</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── NAVIGATION ─────────────────────────────────────────────────────── -->
+  <nav id="navbar" class="bg-cream/95 backdrop-blur-md sticky top-0 z-50 border-b border-plum-100">
+    <div class="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
+
+      <!-- Desktop links -->
+      <div class="hidden md:flex items-center gap-8 text-sm font-body font-medium text-plum-800">
+        <!-- <span class="cursor-default">Accueil</span> -->
+        <span class="cursor-default">Bienfaits</span>
+        <!-- <span class="cursor-default">Vidéos</span> -->
+        <span class="cursor-default">Avis</span>
+        <span class="cursor-default">FAQ</span>
+      </div>
+
+      <!-- Mobile burger -->
+      <button id="burger" class="md:hidden p-2 text-plum-800" aria-label="Menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <!-- Logo -->
+      <a href="#" class="flex-shrink-0 sm:mx-auto">
+        <img src="asset/icone/logo.png" alt="bioprestige" class="w-10">
+      </a>
+      <button class="pointer">
+        <svg width="24" height="24" viewBox="0 0 36 36" fill="none">
+          <path d="M5 6h3l3.6 14.4A2 2 0 0 0 13.5 22H28a2 2 0 0 0 1.95-1.56L32 11H9" stroke="#7c21cc" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" />
+          <circle cx="15" cy="28" r="2" fill="#7c21cc" />
+          <circle cx="26" cy="28" r="2" fill="#7c21cc" />
+        </svg>
+      </button>
+      <!-- CTA -->
+      <!-- <a href="#commander"
+        class="hidden md:inline-flex bg-plum-600 hover:bg-plum-700 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors">
+        Commander
+      </a> -->
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu"
+      class="hidden md:hidden bg-cream border-t border-plum-100 px-4 py-3 flex flex-col gap-3 text-sm font-medium text-plum-800">
+      <span onclick="closeMobile()" class="cursor-default">Accueil</span>
+      <span onclick="closeMobile()" class="cursor-default">Bienfaits</span>
+      <span onclick="closeMobile()" class="cursor-default">Vidéos</span>
+      <span onclick="closeMobile()" class="cursor-default">Avis</span>
+      <span onclick="closeMobile()" class="cursor-default">FAQ</span>
+      <a href="#commander" onclick="closeMobile()"
+        class="bg-plum-600 text-white px-5 py-2 rounded-full text-center">Commander</a>
+    </div>
+  </nav>
+
+  <!-- ── HERO / PRODUCT ─────────────────────────────────────────────────── -->
+  <section id="commander" class="max-w-6xl mx-auto px-4 py-10 md:py-16">
+    <div class="grid md:grid-cols-2 gap-10 items-start">
+
+      <!-- Gallery -->
+      <div>
+        <div class="relative rounded-2xl overflow-hidden bg-plum-50 aspect-square mb-3">
+          <img id="main-img"
+            src="https://bioprestige.shop/cdn/shop/files/hf_20260503_150553_514712f6-614c-4d5b-8d9f-f36f2f7ecf4a.png?v=1777821759&width=800"
+            alt="Poudre d'Ube Premium" class="w-full h-full object-cover transition-opacity duration-300" />
+          <!-- Badge -->
+          <div class="absolute top-4 left-4 bg-plum-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+            PROMO TABASKI STOCK LIMITE
+          </div>
+        </div>
+        <!-- Thumbnails -->
+        <div class="grid grid-cols-5 gap-2" id="thumbs">
+          <img
+            src="https://bioprestige.shop/cdn/shop/files/hf_20260503_150553_514712f6-614c-4d5b-8d9f-f36f2f7ecf4a.png?v=1777821759&width=200"
+            data-full="https://bioprestige.shop/cdn/shop/files/hf_20260503_150553_514712f6-614c-4d5b-8d9f-f36f2f7ecf4a.png?v=1777821759&width=800"
+            class="thumb rounded-lg overflow-hidden aspect-square object-cover cursor-pointer thumb-active" />
+          <img
+            src="https://bioprestige.shop/cdn/shop/files/hf_20260503_150625_663e1781-6f65-4ae7-a7ee-4186aebf4e16.png?v=1777821759&width=200"
+            data-full="https://bioprestige.shop/cdn/shop/files/hf_20260503_150625_663e1781-6f65-4ae7-a7ee-4186aebf4e16.png?v=1777821759&width=800"
+            class="thumb rounded-lg overflow-hidden aspect-square object-cover cursor-pointer" />
+          <img
+            src="https://bioprestige.shop/cdn/shop/files/hf_20260503_151151_5bd331c3-ede7-4ba8-b4d9-bea2bb54b3e2.png?v=1777821758&width=200"
+            data-full="https://bioprestige.shop/cdn/shop/files/hf_20260503_151151_5bd331c3-ede7-4ba8-b4d9-bea2bb54b3e2.png?v=1777821758&width=800"
+            class="thumb rounded-lg overflow-hidden aspect-square object-cover cursor-pointer" />
+          <img
+            src="https://bioprestige.shop/cdn/shop/files/hf_20260503_150643_facbfed6-c3ab-4f9e-85a6-28be36f43bf2.png?v=1777821758&width=200"
+            data-full="https://bioprestige.shop/cdn/shop/files/hf_20260503_150643_facbfed6-c3ab-4f9e-85a6-28be36f43bf2.png?v=1777821758&width=800"
+            class="thumb rounded-lg overflow-hidden aspect-square object-cover cursor-pointer" />
+          <img
+            src="https://bioprestige.shop/cdn/shop/files/hf_20260503_150659_5662f4d7-383a-413c-9fc6-c50c264140b4.png?v=1777821758&width=200"
+            data-full="https://bioprestige.shop/cdn/shop/files/hf_20260503_150659_5662f4d7-383a-413c-9fc6-c50c264140b4.png?v=1777821758&width=800"
+            class="thumb rounded-lg overflow-hidden aspect-square object-cover cursor-pointer" />
+          <img
+            src="https://bioprestige.shop/cdn/shop/files/hf_20260503_151017_2c4d41c3-c152-4e4b-895d-19fd22358491.png?v=1777821758&width=200"
+            data-full="https://bioprestige.shop/cdn/shop/files/hf_20260503_151017_2c4d41c3-c152-4e4b-895d-19fd22358491.png?v=1777821758&width=800"
+            class="thumb rounded-lg overflow-hidden aspect-square object-cover cursor-pointer" />
+          <img src="https://bioprestige.shop/cdn/shop/files/nai1_2.webp?v=1777821758&width=200"
+            data-full="https://bioprestige.shop/cdn/shop/files/nai1_2.webp?v=1777821758&width=800"
+            class="thumb rounded-lg overflow-hidden aspect-square object-cover cursor-pointer" />
+          <img
+            src="https://bioprestige.shop/cdn/shop/files/hf_20260503_151411_9e4322ca-2ae4-4ddc-94b7-c874c5a41758.png?v=1777821758&width=200"
+            data-full="https://bioprestige.shop/cdn/shop/files/hf_20260503_151411_9e4322ca-2ae4-4ddc-94b7-c874c5a41758.png?v=1777821758&width=800"
+            class="thumb rounded-lg overflow-hidden aspect-square object-cover cursor-pointer" />
+        </div>
+      </div>
+
+      <!-- Product info -->
+      <div>
+        <p class="text-plum-500 text-sm font-semibold tracking-widest uppercase mb-1">BioPrestige</p>
+        <h1 class="text-4xl md:text-5xl font-display font-semibold text-plum-900 leading-tight mb-2">
+          Poudre d'Ube Premium
+        </h1>
+        <!-- Stars -->
+        <div class="flex items-center gap-2 mb-4">
+          <div class="flex star text-lg font-bold">★★★★★</div>
+          <span class="text-sm text-gray-500">(1 980 avis)</span>
+        </div>
+        <!-- Price -->
+        <div class="flex items-baseline gap-3 mb-4">
+          <span class="text-3xl font-bold text-plum-900">CFA 14 990</span>
+          <span class="text-sm bg-plum-100 text-plum-700 px-2 py-0.5 rounded-full font-semibold">PROMO</span>
+        </div>
+        <!-- Description -->
+        <p class="text-gray-600 text-sm leading-relaxed mb-5">
+          <strong class="text-plum-800">Nutrition. Beauté. Plaisir.</strong> Découvrez une super-racine naturellement
+          violette, reconnue pour ses bienfaits et son goût délicatement sucré. Elle nourrit le corps en profondeur tout
+          en apportant une touche visuelle unique à vos boissons et créations culinaires.
+        </p>
+        <!-- Badges -->
+        <div class="flex flex-wrap gap-2 mb-6">
+          <span
+            class="flex items-center gap-1 bg-plum-50 text-plum-700 text-xs font-medium px-3 py-1.5 rounded-full border border-plum-100">
+            🌿 100% naturelle
+          </span>
+          <span
+            class="flex items-center gap-1 bg-plum-50 text-plum-700 text-xs font-medium px-3 py-1.5 rounded-full border border-plum-100">
+            💜 Sans additifs
+          </span>
+          <span
+            class="flex items-center gap-1 bg-plum-50 text-plum-700 text-xs font-medium px-3 py-1.5 rounded-full border border-plum-100">
+            ✨ Goût subtil
+          </span>
+        </div>
+
+        <!-- Bundle selector -->
+        <div class="mb-6">
+          <p class="text-sm font-semibold text-plum-900 mb-3 uppercase tracking-wide">Choisissez votre offre :</p>
+          <div class="flex flex-col gap-3">
+
+            <div class="bundle-card selected rounded-xl p-4 border border-gray-200 bg-white" data-qty="1"
+              data-price="14990" data-label="1 Acheté = 1 Offert" onclick="selectBundle(this)">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div
+                    class="w-5 h-5 rounded-full border-2 border-plum-500 flex items-center justify-center bundle-dot">
+                    <div class="w-2.5 h-2.5 rounded-full bg-plum-500 bundle-inner"></div>
+                  </div>
+                  <div>
+                    <p class="font-semibold text-sm text-plum-900">1 Acheté = 1 Offert</p>
+                    <p class="text-xs text-gray-500">Livraison Gratuite incluse</p>
+                  </div>
+                </div>
+                <span class="text-plum-800 font-bold text-sm">CFA 14 990</span>
+              </div>
+            </div>
+
+            <div class="bundle-card rounded-xl p-4 border border-gray-200 bg-white relative" data-qty="2"
+              data-price="27000" data-label="2 Achetés = 2 Offerts" onclick="selectBundle(this)">
+              <span
+                class="absolute -top-2 right-3 bg-plum-600 text-white text-xs px-2 py-0.5 rounded-full font-semibold">POPULAIRE</span>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div
+                    class="w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center bundle-dot">
+                    <div class="w-2.5 h-2.5 rounded-full bg-transparent bundle-inner"></div>
+                  </div>
+                  <div>
+                    <p class="font-semibold text-sm text-plum-900">2 Achetés = 2 Offerts</p>
+                    <p class="text-xs text-gray-500">Économisez CFA 2 980</p>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <p class="text-plum-800 font-bold text-sm">CFA 27 000</p>
+                  <p class="text-xs text-gray-400 line-through">CFA 29 980</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bundle-card rounded-xl p-4 border border-gray-200 bg-white" data-qty="3" data-price="41000"
+              data-label="3 Achetés = 3 Offerts" onclick="selectBundle(this)">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div
+                    class="w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center bundle-dot">
+                    <div class="w-2.5 h-2.5 rounded-full bg-transparent bundle-inner"></div>
+                  </div>
+                  <div>
+                    <p class="font-semibold text-sm text-plum-900">3 Achetés = 3 Offerts</p>
+                    <p class="text-xs text-gray-500">Économisez CFA 3 970</p>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <p class="text-plum-800 font-bold text-sm">CFA 41 000</p>
+                  <p class="text-xs text-gray-400 line-through">CFA 44 970</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <button onclick="addToCart()"
+          class="cta-btn w-full bg-plum-600 hover:bg-plum-700 active:scale-95 text-white font-semibold py-4 rounded-full text-base transition-all duration-200 mb-4">
+          🛒 Commander maintenant
+        </button>
+        <!-- Trust -->
+        <div class="grid grid-cols-3 gap-2 text-center">
+          <div class="bg-white rounded-xl p-3 border border-gray-100">
+            <div class="text-lg mb-1">🚚</div>
+            <p class="text-xs text-gray-600 font-medium">Livraison<br />Gratuite</p>
+          </div>
+          <div class="bg-white rounded-xl p-3 border border-gray-100">
+            <div class="text-lg mb-1">💳</div>
+            <p class="text-xs text-gray-600 font-medium">Paiement à<br />la livraison</p>
+          </div>
+          <div class="bg-white rounded-xl p-3 border border-gray-100">
+            <div class="text-lg mb-1">↩️</div>
+            <p class="text-xs text-gray-600 font-medium">Retour<br />Facile</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHY UBE ─────────────────────────────────────────────────────────── -->
+  <section class="bg-white py-16 reveal">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+      <img src="https://bioprestige.shop/cdn/shop/files/nai1_2.webp?v=1777821758&width=800"
+        alt="Pourquoi notre poudre d'Ube" class="rounded-2xl w-full object-cover shadow-lg" />
+      <div>
+        <p class="text-plum-500 text-sm font-semibold tracking-widest uppercase mb-2">Notre Engagement</p>
+        <h2 class="text-3xl md:text-4xl font-display font-semibold text-plum-900 mb-4">
+          Pourquoi choisir notre poudre d'Ube ?
+        </h2>
+        <p class="text-gray-600 leading-relaxed mb-6">
+          Notre poudre d'Ube est une qualité premium à la texture fine, facile à dissoudre. Naturellement violette, elle
+          offre une alternative saine aux arômes artificiels et s'adapte aussi bien aux particuliers qu'aux
+          professionnels.
+        </p>
+        <ul class="space-y-3 text-sm text-gray-700">
+          <li class="flex items-start gap-3"><span class="text-plum-500 text-lg">✦</span> Texture ultra-fine,
+            dissolution rapide dans toutes vos boissons</li>
+          <li class="flex items-start gap-3"><span class="text-plum-500 text-lg">✦</span> Couleur violette naturelle 100
+            % sans colorants</li>
+          <li class="flex items-start gap-3"><span class="text-plum-500 text-lg">✦</span> Idéale pour lattes, smoothies,
+            desserts et pâtisseries</li>
+          <li class="flex items-start gap-3"><span class="text-plum-500 text-lg">✦</span> Adaptée aux particuliers et
+            aux professionnels</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRESENTATION ───────────────────────────────────────────────────── -->
+  <section class="py-16 bg-plum-50 reveal">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <p class="text-plum-500 text-sm font-semibold tracking-widest uppercase mb-2">Présentation</p>
+        <h2 class="text-3xl md:text-4xl font-display font-semibold text-plum-900 mb-4">
+          Une super-racine d'exception
+        </h2>
+        <p class="text-gray-600 leading-relaxed mb-4">
+          Notre poudre d'Ube est issue d'ignames violettes sélectionnées avec soin, séchées puis finement moulues. 100 %
+          naturelle, sans colorants ni additifs, elle apporte une couleur unique et un goût délicat à toutes vos
+          recettes.
+        </p>
+        <p class="text-gray-600 leading-relaxed">
+          Chaque lot est produit selon des standards de qualité stricts pour vous garantir une poudre pure, fraîche et
+          pleine de saveur.
+        </p>
+      </div>
+      <img
+        src="https://bioprestige.shop/cdn/shop/files/main1_5_c0243452-cf34-4987-a599-722562a8ab20.webp?v=1777821758&width=800"
+        alt="Présentation Ube" class="rounded-2xl w-full object-cover shadow-lg" />
+    </div>
+  </section>
+
+  <!-- ── BIENFAITS ──────────────────────────────────────────────────────── -->
+  <section id="bienfaits" class="py-16 bg-white reveal">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <p class="text-plum-500 text-sm font-semibold tracking-widest uppercase mb-2">Pour votre corps</p>
+        <h2 class="text-3xl md:text-4xl font-display font-semibold text-plum-900">Les bienfaits de l'Ube</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-plum-50 rounded-2xl p-5 border border-plum-100">
+            <div class="text-3xl mb-3">🫐</div>
+            <h3 class="font-display font-semibold text-plum-900 text-lg mb-1">Antioxydants</h3>
+            <p class="text-xs text-gray-500">Protège les cellules contre le stress oxydatif</p>
+          </div>
+          <div class="bg-plum-50 rounded-2xl p-5 border border-plum-100">
+            <div class="text-3xl mb-3">⚡</div>
+            <h3 class="font-display font-semibold text-plum-900 text-lg mb-1">Énergie</h3>
+            <p class="text-xs text-gray-500">Source d'énergie naturelle et durable</p>
+          </div>
+          <div class="bg-plum-50 rounded-2xl p-5 border border-plum-100">
+            <div class="text-3xl mb-3">🌱</div>
+            <h3 class="font-display font-semibold text-plum-900 text-lg mb-1">Digestion</h3>
+            <p class="text-xs text-gray-500">Favorise un transit sain et équilibré</p>
+          </div>
+          <div class="bg-plum-50 rounded-2xl p-5 border border-plum-100">
+            <div class="text-3xl mb-3">🍬</div>
+            <h3 class="font-display font-semibold text-plum-900 text-lg mb-1">Goût naturel</h3>
+            <p class="text-xs text-gray-500">Légèrement sucré, sans sucres ajoutés</p>
+          </div>
+        </div>
+        <img
+          src="https://bioprestige.shop/cdn/shop/files/hf_20260503_150643_facbfed6-c3ab-4f9e-85a6-28be36f43bf2.png?v=1777821758&width=800"
+          alt="Bienfaits" class="rounded-2xl w-full object-cover shadow-lg" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── COMMENT UTILISER ───────────────────────────────────────────────── -->
+  <section class="py-16 bg-plum-900 reveal">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <p class="text-plum-200 text-sm font-semibold tracking-widest uppercase mb-2">Mode d'emploi</p>
+        <h2 class="text-3xl md:text-4xl font-display font-semibold text-white">Comment l'utiliser ?</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <img
+          src="https://bioprestige.shop/cdn/shop/files/hf_20260503_151411_9e4322ca-2ae4-4ddc-94b7-c874c5a41758.png?v=1777821758&width=800"
+          alt="Comment utiliser" class="rounded-2xl w-full object-cover" />
+        <div class="space-y-6">
+          <div class="flex items-start gap-4">
+            <div
+              class="w-10 h-10 rounded-full bg-plum-500 text-white font-bold flex items-center justify-center flex-shrink-0">
+              1</div>
+            <div>
+              <h3 class="font-display font-semibold text-white text-xl mb-1">Dosez</h3>
+              <p class="text-plum-200 text-sm">Ajoutez 1 à 2 cuillères à café dans votre boisson ou préparation.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div
+              class="w-10 h-10 rounded-full bg-plum-500 text-white font-bold flex items-center justify-center flex-shrink-0">
+              2</div>
+            <div>
+              <h3 class="font-display font-semibold text-white text-xl mb-1">Mélangez</h3>
+              <p class="text-plum-200 text-sm">Incorporez dans votre latte, café, smoothie ou dessert favori.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div
+              class="w-10 h-10 rounded-full bg-plum-500 text-white font-bold flex items-center justify-center flex-shrink-0">
+              3</div>
+            <div>
+              <h3 class="font-display font-semibold text-white text-xl mb-1">Savourez</h3>
+              <p class="text-plum-200 text-sm">Admirez la couleur violette magique et dégustez pleinement.</p>
+            </div>
+          </div>
+          <a href="#commander"
+            class="inline-flex items-center gap-2 bg-white text-plum-800 font-semibold px-6 py-3 rounded-full hover:bg-plum-50 transition-colors">
+            Commander maintenant →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── VIDEOS ─────────────────────────────────────────────────────────── -->
+  <section id="videos" class="py-16 bg-cream reveal">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center mb-10">
+        <p class="text-plum-500 text-sm font-semibold tracking-widest uppercase mb-2">En action</p>
+        <h2 class="text-3xl md:text-4xl font-display font-semibold text-plum-900">Découvrez l'Ube en vidéo</h2>
+      </div>
+      <div class="videos-row">
+        <div class="video-wrap">
+          <video id="v1" controls muted loop playsinline preload="metadata"
+            poster="https://bioprestige.shop/cdn/shop/files/hf_20260503_150553_514712f6-614c-4d5b-8d9f-f36f2f7ecf4a.png?v=1777821759&width=400"></video>
+        </div>
+        <div class="video-wrap">
+          <video id="v2" controls muted loop playsinline preload="metadata"
+            poster="https://bioprestige.shop/cdn/shop/files/hf_20260503_150625_663e1781-6f65-4ae7-a7ee-4186aebf4e16.png?v=1777821759&width=400"></video>
+        </div>
+        <div class="video-wrap">
+          <video id="v3" controls muted loop playsinline preload="metadata"
+            poster="https://bioprestige.shop/cdn/shop/files/hf_20260503_151151_5bd331c3-ede7-4ba8-b4d9-bea2bb54b3e2.png?v=1777821758&width=400"></video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIALS ───────────────────────────────────────────────────── -->
+  <section id="avis" class="py-16 bg-white reveal">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center mb-10">
+        <p class="text-plum-500 text-sm font-semibold tracking-widest uppercase mb-2">Ce qu'ils en disent</p>
+        <h2 class="text-3xl md:text-4xl font-display font-semibold text-plum-900">1 980 clients satisfaits</h2>
+        <div class="flex justify-center items-center gap-2 mt-3">
+          <div class="star text-xl font-bold">★★★★★</div>
+          <span class="text-gray-500 text-sm">4.9/5 — Note moyenne</span>
+        </div>
+      </div>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
+
+        <div class="bg-plum-50 rounded-2xl p-6 border border-plum-100">
+          <div class="star text-base mb-3 font-bold">★★★★★</div>
+          <p class="text-gray-700 text-sm leading-relaxed mb-4">"La couleur est incroyable et le goût est doux, parfait
+            pour mes lattes. Je recommande vivement !"</p>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-9 h-9 rounded-full bg-plum-200 flex items-center justify-center text-plum-700 font-bold text-sm">
+              AD</div>
+            <div>
+              <p class="font-semibold text-sm text-plum-900">Awa D.</p>
+              <p class="text-xs text-gray-400">Très satisfait</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-plum-50 rounded-2xl p-6 border border-plum-100">
+          <div class="star text-base mb-3 font-bold">★★★★★</div>
+          <p class="text-gray-700 text-sm leading-relaxed mb-4">"Produit naturel, facile à utiliser, mes clients
+            adorent. Livraison rapide, je repasserai commande."</p>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-9 h-9 rounded-full bg-plum-200 flex items-center justify-center text-plum-700 font-bold text-sm">
+              MS</div>
+            <div>
+              <p class="font-semibold text-sm text-plum-900">Mamadou S.</p>
+              <p class="text-xs text-gray-400">Livraison rapide</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-plum-50 rounded-2xl p-6 border border-plum-100">
+          <div class="star text-base mb-3 font-bold">★★★★★</div>
+          <p class="text-gray-700 text-sm leading-relaxed mb-4">"Enfin une alternative saine et stylée au chocolat.
+            Qualité exceptionnelle, je suis conquise !"</p>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-9 h-9 rounded-full bg-plum-200 flex items-center justify-center text-plum-700 font-bold text-sm">
+              FK</div>
+            <div>
+              <p class="font-semibold text-sm text-plum-900">Fatou K.</p>
+              <p class="text-xs text-gray-400">Qualité exceptionnelle</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-plum-50 rounded-2xl p-6 border border-plum-100">
+          <div class="star text-base mb-3 font-bold">★★★★★</div>
+          <p class="text-gray-700 text-sm leading-relaxed mb-4">"Goût doux, couleur incroyable. Parfait pour mes lattes
+            du matin. Mon nouveau rituel quotidien !"</p>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-9 h-9 rounded-full bg-plum-200 flex items-center justify-center text-plum-700 font-bold text-sm">
+              MT</div>
+            <div>
+              <p class="font-semibold text-sm text-plum-900">Moussa T.</p>
+              <p class="text-xs text-gray-400">Client fidèle</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-plum-50 rounded-2xl p-6 border border-plum-100">
+          <div class="star text-base mb-3 font-bold">★★★★★</div>
+          <p class="text-gray-700 text-sm leading-relaxed mb-4">"Produit naturel, facile à utiliser, très satisfait.
+            L'offre 1+1 est vraiment avantageuse !"</p>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-9 h-9 rounded-full bg-plum-200 flex items-center justify-center text-plum-700 font-bold text-sm">
+              AB</div>
+            <div>
+              <p class="font-semibold text-sm text-plum-900">Aida B.</p>
+              <p class="text-xs text-gray-400">Très satisfait</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-plum-900 rounded-2xl p-6 flex flex-col items-center justify-center text-center">
+          <p class="text-plum-200 text-sm mb-2">Note globale</p>
+          <p class="text-white font-display font-semibold text-5xl mb-1">4.9</p>
+          <div class="star text-xl mb-3 font-bold">★★★★★</div>
+          <p class="text-plum-300 text-xs text-white">Basé sur 1 980 avis vérifiés</p>
+          <a href="#commander"
+            class="mt-4 bg-plum-500 text-white text-sm font-semibold px-5 py-2 rounded-full hover:bg-plum-400 transition-colors">
+            Commander →
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ────────────────────────────────────────────────────────────── -->
+  <section id="faq" class="py-16 bg-plum-50 reveal">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <p class="text-plum-500 text-sm font-semibold tracking-widest uppercase mb-2">Questions fréquentes</p>
+        <h2 class="text-3xl md:text-4xl font-display font-semibold text-plum-900">Vos questions, nos réponses</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4">
+
+        <div class="bg-white rounded-2xl border border-plum-100 overflow-hidden">
+          <button class="faq-trigger w-full flex items-center justify-between px-5 py-4 text-left gap-3"
+            onclick="toggleFaq(this)">
+            <span class="font-semibold text-sm text-plum-900">La poudre contient-elle du café ?</span>
+            <span
+              class="faq-icon flex-shrink-0 w-7 h-7 rounded-full bg-plum-100 text-plum-600 flex items-center justify-center font-bold text-base">+</span>
+          </button>
+          <div class="faq-answer px-5 pb-4 border-t border-plum-50">
+            <p class="text-sm text-gray-600 pt-3">Non. L'Ube est une racine. Le café est optionnel selon la recette. La
+              poudre d'Ube est naturellement sans caféine.</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-plum-100 overflow-hidden">
+          <button class="faq-trigger w-full flex items-center justify-between px-5 py-4 text-left gap-3"
+            onclick="toggleFaq(this)">
+            <span class="font-semibold text-sm text-plum-900">Est-ce sucré naturellement ?</span>
+            <span
+              class="faq-icon flex-shrink-0 w-7 h-7 rounded-full bg-plum-100 text-plum-600 flex items-center justify-center font-bold text-base">+</span>
+          </button>
+          <div class="faq-answer px-5 pb-4 border-t border-plum-50">
+            <p class="text-sm text-gray-600 pt-3">Légèrement, naturellement. Aucun sucre ajouté. Le goût doux provient
+              uniquement de la racine d'igname violette.</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-plum-100 overflow-hidden">
+          <button class="faq-trigger w-full flex items-center justify-between px-5 py-4 text-left gap-3"
+            onclick="toggleFaq(this)">
+            <span class="font-semibold text-sm text-plum-900">Convient-elle aux enfants ?</span>
+            <span
+              class="faq-icon flex-shrink-0 w-7 h-7 rounded-full bg-plum-100 text-plum-600 flex items-center justify-center font-bold text-base">+</span>
+          </button>
+          <div class="faq-answer px-5 pb-4 border-t border-plum-50">
+            <p class="text-sm text-gray-600 pt-3">Oui, la poudre d'Ube convient aux enfants. C'est un aliment 100 %
+              naturel utilisé couramment dans l'alimentation familiale.</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-plum-100 overflow-hidden">
+          <button class="faq-trigger w-full flex items-center justify-between px-5 py-4 text-left gap-3"
+            onclick="toggleFaq(this)">
+            <span class="font-semibold text-sm text-plum-900">Bon pour les diabétiques ?</span>
+            <span
+              class="faq-icon flex-shrink-0 w-7 h-7 rounded-full bg-plum-100 text-plum-600 flex items-center justify-center font-bold text-base">+</span>
+          </button>
+          <div class="faq-answer px-5 pb-4 border-t border-plum-50">
+            <p class="text-sm text-gray-600 pt-3">L'Ube a un index glycémique plus doux que le sucre raffiné. Consultez
+              tout de même un professionnel de santé selon votre situation.</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-plum-100 overflow-hidden">
+          <button class="faq-trigger w-full flex items-center justify-between px-5 py-4 text-left gap-3"
+            onclick="toggleFaq(this)">
+            <span class="font-semibold text-sm text-plum-900">Comment conserver la poudre ?</span>
+            <span
+              class="faq-icon flex-shrink-0 w-7 h-7 rounded-full bg-plum-100 text-plum-600 flex items-center justify-center font-bold text-base">+</span>
+          </button>
+          <div class="faq-answer px-5 pb-4 border-t border-plum-50">
+            <p class="text-sm text-gray-600 pt-3">Dans un endroit sec, à l'abri de la chaleur et de l'humidité. Refermez
+              bien l'emballage après chaque utilisation.</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-plum-100 overflow-hidden">
+          <button class="faq-trigger w-full flex items-center justify-between px-5 py-4 text-left gap-3"
+            onclick="toggleFaq(this)">
+            <span class="font-semibold text-sm text-plum-900">Quelle est la durée de livraison ?</span>
+            <span
+              class="faq-icon flex-shrink-0 w-7 h-7 rounded-full bg-plum-100 text-plum-600 flex items-center justify-center font-bold text-base">+</span>
+          </button>
+          <div class="faq-answer px-5 pb-4 border-t border-plum-50">
+            <p class="text-sm text-gray-600 pt-3">Livraison gratuite partout à Dakar. Notre équipe vous contacte après
+              commande pour convenir d'un créneau. Paiement à la livraison.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FINAL CTA ──────────────────────────────────────────────────────── -->
+  <section class="bg-plum-900 py-16 text-center reveal">
+    <div class="max-w-2xl mx-auto px-4">
+      <p class="text-white text-sm font-semibold tracking-widest uppercase mb-3">Promo Tabaski</p>
+      <h2 class="text-3xl md:text-5xl font-display font-semibold text-white mb-4">
+        1 Acheté = 1 Offert
+      </h2>
+      <p class="text-plum-200 text-sm mb-8">Livraison gratuite · Paiement à la livraison · Retour facile</p>
+      <a href="#commander"
+        class="inline-flex items-center gap-2 bg-white text-plum-900 font-bold px-8 py-4 rounded-full text-base hover:bg-plum-50 transition-all active:scale-95">
+        Commander maintenant →
+      </a>
+      <p class="text-plum-400 text-xs mt-6">⭐ Plus de 1 980 clients satisfaits</p>
+    </div>
+  </section>
+
+  <!-- ── WHATSAPP + FOOTER ──────────────────────────────────────────────── -->
+  <footer class="bg-plum-900 border-t border-plum-800 pt-8 pb-6">
+    <!-- WhatsApp CTA -->
+    <div class="max-w-xl mx-auto px-4 text-center mb-10">
+      <div class="text-3xl mb-3">💬</div>
+      <h3 class="font-display font-semibold text-white text-2xl mb-2">Abonnez vous avec votre WhatsApp</h3>
+      <p class=" text-sm mb-5 text-white">Entrez votre numéro et nous vous contactons immédiatement pour finaliser
+        votre commande.</p>
+      <div class="flex gap-2 max-w-sm mx-auto">
+        <div
+          class="flex flex-1 items-center bg-plum-800 border border-plum-600 rounded-full px-4 gap-2 focus-within:border-plum-400 transition-colors">
+          <span class="text-white text-sm flex-shrink-0">🇸🇳 +221</span>
+          <input type="tel" placeholder="78 123 45 67"
+            class="flex-1 bg-transparent text-white placeholder-plum-400 text-sm py-2.5 focus:outline-none min-w-0" />
+        </div>
+        <button onclick="sendWhatsApp()"
+          class="bg-green-500 hover:bg-green-400 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors flex-shrink-0">
+          Envoyer
+        </button>
+      </div>
+      <p class="text-plum-500 text-xs mt-3">Ou contactez-nous directement : <a href="https://wa.me/221XXXXXXXX"
+          class="text-green-400 hover:text-green-300 font-semibold">WhatsApp BioPrestige</a></p>
+    </div>
+    <!-- Footer links -->
+    <div
+      class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-plum-400">
+      <img src="asset/icone/logo.png" alt="bioprestige" class="w-10">
+      <div class="flex gap-6">
+        <span class="cursor-default">Accueil</span>
+        <span class="cursor-default">Bienfaits</span>
+        <span class="cursor-default">FAQ</span>
+        <span class="cursor-default">Contact</span>
+      </div>
+      <p>© 2026 BioPrestige — Tous droits réservés</p>
+    </div>
+  </footer>
+
+  <!-- ── TOAST ──────────────────────────────────────────────────────────── -->
+  <div id="toast"
+    class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-plum-700 text-white px-6 py-3 rounded-full text-sm font-semibold shadow-xl opacity-0 pointer-events-none transition-opacity duration-300 z-50">
+    ✅ Commande ajoutée — nous vous contactons bientôt !
+  </div>
+
+  <!-- ── JS ─────────────────────────────────────────────────────────────── -->
+  <script src="js/main.js"></script>
+</body>
+
+</html>
