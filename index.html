@@ -258,58 +258,63 @@
         </div>
 
         <!-- ── POPUP COMMANDE ─────────────────────────────────────────────── -->
-<div class="popup-overlay" id="popupOverlay">
-  <div class="popup-modal" role="dialog" aria-modal="true" aria-labelledby="popup-title">
-    
-    <div class="popup-modal-header">
-      <button class="popup-close" id="popupClose" aria-label="Fermer">✕</button>
-      <h2 id="popup-title">🛒 Finaliser ma commande</h2>
-      <p>Livraison gratuite · Paiement à la livraison</p>
-      <div class="popup-badge">📦 &nbsp;Dakar — livré chez vous</div>
-    </div>
+        <div class="popup-overlay" id="popupOverlay">
+          <div class="popup-modal" role="dialog" aria-modal="true" aria-labelledby="popup-title">
 
-    <div class="popup-body" id="popupBody">
+            <div class="popup-modal-header">
+              <button class="popup-close" id="popupClose" aria-label="Fermer">✕</button>
+              <h2 id="popup-title">🛒 Finaliser ma commande</h2>
+              <p>Livraison gratuite · Paiement à la livraison</p>
+              <div class="popup-badge">📦 &nbsp;Dakar — livré chez vous</div>
+            </div>
 
-      <!-- Résumé bundle sélectionné -->
-      <div class="popup-bundle-summary">
-        <div>
-          <div class="label" id="popupBundleLabel">1 Acheté = 1 Offert</div>
-          <div class="sub">Livraison incluse</div>
+            <div class="popup-body" id="popupBody">
+
+              <!-- Résumé bundle sélectionné -->
+              <div class="popup-bundle-summary">
+                <div>
+                  <div class="label" id="popupBundleLabel">1 Acheté = 1 Offert</div>
+                  <div class="sub">Livraison incluse</div>
+                </div>
+                <div class="qty-badge" id="popupBundleQty">× 2 sachets</div>
+              </div>
+
+              <div class="popup-field">
+                <label>👤 Prénom et Nom <span class="req">*</span></label>
+                <input type="text" id="popup-nom" placeholder="Aicha Fall" required
+                  pattern="^[A-Za-zÀ-ÖØ-öø-ÿ\s'\-]{2,}$"
+                  title="Le nom doit contenir uniquement des lettres, espaces, apostrophes ou tirets." />
+              </div>
+
+              <div class="popup-field">
+                <label>📱 Numéro de téléphone <span class="req">*</span></label>
+                <div class="phone-field-wrap">
+                  <div class="phone-prefix">🇸🇳 +221</div>
+                  <input type="tel" id="popup-tel" placeholder="78 123 45 67" required pattern="^(70|71|76|77|78)\d{7}$"
+                    title="Le numéro doit commencer par 70, 71, 76, 77 ou 78 et contenir exactement 9 chiffres." />
+                </div>
+              </div>
+
+              <div class="popup-field">
+                <label>📍 Adresse domicile <span class="req">*</span></label>
+                <input type="text" id="popup-adresse" placeholder="Dakar, Malika Plage" required
+                  pattern="^[A-Za-z0-9\s,.-]{5,}$"
+                  title="L'adresse doit contenir uniquement des lettres, chiffres, espaces, virgules, points ou tirets." />
+              </div>
+
+              <button class="popup-submit" id="popupSubmit">
+                ✅ &nbsp;Valider ma commande
+              </button>
+
+              <div class="popup-trust">
+                <div class="popup-trust-item">🚚 Livraison gratuite</div>
+                <div class="popup-trust-item">💳 Payer à la livraison</div>
+                <div class="popup-trust-item">↩️ Retour facile</div>
+              </div>
+
+            </div>
+          </div>
         </div>
-        <div class="qty-badge" id="popupBundleQty">× 2 sachets</div>
-      </div>
-
-      <div class="popup-field">
-        <label>👤 Prénom et Nom <span class="req">*</span></label>
-        <input type="text" id="popup-nom" placeholder="Aicha Fall" required />
-      </div>
-
-      <div class="popup-field">
-        <label>📱 Numéro de téléphone <span class="req">*</span></label>
-        <div class="phone-field-wrap">
-          <div class="phone-prefix">🇸🇳 +221</div>
-          <input type="tel" id="popup-tel" placeholder="78 123 45 67" required />
-        </div>
-      </div>
-
-      <div class="popup-field">
-        <label>📍 Adresse domicile <span class="req">*</span></label>
-        <input type="text" id="popup-adresse" placeholder="Dakar, Malika Plage" required />
-      </div>
-
-      <button class="popup-submit" id="popupSubmit">
-        ✅ &nbsp;Valider ma commande
-      </button>
-
-      <div class="popup-trust">
-        <div class="popup-trust-item">🚚 Livraison gratuite</div>
-        <div class="popup-trust-item">💳 Payer à la livraison</div>
-        <div class="popup-trust-item">↩️ Retour facile</div>
-      </div>
-
-    </div>
-  </div>
-</div>
         <!-- CTA -->
         <button
           class="cta-btn w-full bg-plum-600 hover:bg-plum-700 active:scale-95 text-white font-semibold py-4 rounded-full text-base transition-all duration-200 mb-4">
@@ -751,6 +756,7 @@
 
   <!-- ── JS ─────────────────────────────────────────────────────────────── -->
   <script src="js/main.js"></script>
+  <script src="js/pixelMeta.js"></script> 
 </body>
 
 </html>
