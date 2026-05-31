@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Cormorant Garamond", serif;
+  --font-body: "Outfit", sans-serif;
+
+  --color-cream: #fdf8f2;
+  --color-gold: #c9a455;
+
+  --color-plum-50: #f9f0ff;
+  --color-plum-100: #f0d9ff;
+  --color-plum-200: #ddb3ff;
+  --color-plum-400: #a855f7;
+  --color-plum-500: #9333ea;
+  --color-plum-600: #7c21cc;
+  --color-plum-700: #6519a8;
+  --color-plum-800: #4c1282;
+  --color-plum-900: #2e0659;
+}

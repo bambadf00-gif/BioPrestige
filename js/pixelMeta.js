@@ -8,12 +8,9 @@
 //   - Purchase       → quand la commande est validée avec succès
 // ────────────────────────────────────────────────────────────────────────
 
-/* ---------------------------------------------------------------
-   1️⃣ Initialisation du Pixel Facebook
-   --------------------------------------------------------------- */
-!function(f,b,e,v,n,t,s){
-  if(f.fbq) return;
-  n = f.fbq = function() {
+!function (f, b, e, v, n, t, s) {
+  if (f.fbq) return;
+  n = f.fbq = function () {
     n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
   };
   if (!f._fbq) f._fbq = n;
@@ -30,16 +27,10 @@
 
 fbq('init', '1979077993036338');
 
-/* ---------------------------------------------------------------
-   2️⃣ PageView — déclenché au chargement de la page
-   --------------------------------------------------------------- */
+// 1️⃣ Événements de base (Chargement)
 fbq('track', 'PageView');
-
-/* ---------------------------------------------------------------
-   3️⃣ ViewContent — déclenché au chargement (produit vu)
-   --------------------------------------------------------------- */
 fbq('track', 'ViewContent', {
-  content_name: 'Poudre Ube Premium',
+  content_name: "Poudre d'Ube Premium",
   content_category: 'Complément alimentaire',
   content_ids: ['ube-premium-001'],
   content_type: 'product',
@@ -47,58 +38,49 @@ fbq('track', 'ViewContent', {
   value: 15000,
 });
 
-/* ---------------------------------------------------------------
-   4️⃣ InitiateCheckout — déclenché quand le popup s'ouvre
-   On surcharge openPopup() défini dans main.js
-   --------------------------------------------------------------- */
-const _originalOpenPopup = typeof openPopup === 'function' ? openPopup : null;
-
-// On attend que le DOM soit prêt pour intercepter le bouton CTA
+// Attente du chargement de la page pour les clics et formulaires
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Intercepter le bouton CTA pour tracker InitiateCheckout
+  // 2️⃣ Événement : InitiateCheckout (Ouverture formulaire / Clic CTA)
   const ctaButtons = document.querySelectorAll('.cta-btn');
   ctaButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
-      // Récupérer le bundle sélectionné pour enrichir l'événement
       const sel = document.querySelector('.bundle-card.selected');
-      const qty = sel ? parseInt(sel.dataset.qty) * 2 : 2;
-      const label = sel ? sel.dataset.label : '1 Acheté = 1 Offert';
+
+      // Récupération dynamique des données du pack sélectionné
+      const qty = sel && sel.dataset.qty ? parseInt(sel.dataset.qty) : 2; // Défaut à 2 articles
+      const price = sel && sel.dataset.price ? parseFloat(sel.dataset.price) : 15000; // Prix dynamique
 
       fbq('track', 'InitiateCheckout', {
-        content_name: 'Poudre Ube Premium',
+        content_name: "Poudre d'Ube Premium",
         content_ids: ['ube-premium-001'],
         content_type: 'product',
         num_items: qty,
         currency: 'XOF',
-        value: 15000,
+        value: price,
       });
     });
   });
 
-  /* ---------------------------------------------------------------
-     5️⃣ Purchase — déclenché après validation réussie de la commande
-     On observe les mutations du DOM pour détecter le popup-success
-     --------------------------------------------------------------- */
+  // 3️⃣ Événement : Purchase (Détection du message Succès)
   const popupBody = document.getElementById('popupBody');
   if (popupBody) {
     const purchaseObserver = new MutationObserver(() => {
       const successDiv = popupBody.querySelector('.popup-success');
       if (successDiv && !successDiv.dataset.tracked) {
-        // Marquer pour éviter un double-tracking
-        successDiv.dataset.tracked = 'true';
+        successDiv.dataset.tracked = 'true'; // Évite le double déclenchement
 
-        // Récupérer les infos du bundle sélectionné
         const sel = document.querySelector('.bundle-card.selected');
-        const qty = sel ? parseInt(sel.dataset.qty) * 2 : 2;
+        const qty = sel && sel.dataset.qty ? parseInt(sel.dataset.qty) : 2;
+        const price = sel && sel.dataset.price ? parseFloat(sel.dataset.price) : 15000;
 
         fbq('track', 'Purchase', {
-          content_name: 'Poudre Ube Premium',
+          content_name: "Poudre d'Ube Premium",
           content_ids: ['ube-premium-001'],
           content_type: 'product',
           num_items: qty,
           currency: 'XOF',
-          value: 15000,
+          value: price,
         });
       }
     });
