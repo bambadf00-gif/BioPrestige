@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BioPrestige — Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/admin.css" type="text/css">
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-wrap">
+    <div class="login-logo">
+      <div class="login-logo-icon">💜</div>
+      <h1>BioPrestige</h1>
+      <p>Connectez-vous à votre espace admin</p>
+    </div>
+    <div class="login-card">
+      <label class="form-label">Mot de passe</label>
+      <input class="form-input" type="password" id="passwordInput" placeholder="Entrez votre mot de passe"
+        onkeydown="if(event.key==='Enter') doLogin()" autofocus />
+      <button class="btn-primary" onclick="doLogin()">Se connecter</button>
+      <div class="login-error" id="loginError">Mot de passe incorrect. Réessayez.</div>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-icon">💜</div>
+      <div class="sidebar-brand">BioPrestige<span>Administration</span></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Principal</div>
+      <a class="nav-link active">
+        <span class="icon">📋</span>
+        <span>Commandes</span>
+        <span class="nav-badge" id="pendingBadge">0</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-row">
+        <div class="user-avatar">BP</div>
+        <div class="user-info">
+          <div class="user-name">Admin</div>
+          <div class="user-role">Gérant</div>
+        </div>
+        <button class="logout-btn" onclick="doLogout()" title="Déconnexion">↩</button>
+      </div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <h2>Commandes</h2>
+        <p id="lastUpdated">—</p>
+      </div>
+      <button class="btn-outline" onclick="loadOrders()">↻ Actualiser</button>
+    </div>
+
+    <div class="content">
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-header"><span class="stat-label">Total commandes</span><div class="stat-icon-wrap" style="background:#f5f3ff">📦</div></div>
+          <div class="stat-value" id="statTotal">—</div>
+          <div class="stat-sub">Toutes périodes</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-header"><span class="stat-label">En attente</span><div class="stat-icon-wrap" style="background:#fef3c7">⏳</div></div>
+          <div class="stat-value" id="statPending">—</div>
+          <div class="stat-sub">À traiter</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-header"><span class="stat-label">Livrées</span><div class="stat-icon-wrap" style="background:#d1fae5">✅</div></div>
+          <div class="stat-value" id="statDelivered">—</div>
+          <div class="stat-sub">Complétées</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-header"><span class="stat-label">Revenus</span><div class="stat-icon-wrap" style="background:#ede9fe">💰</div></div>
+          <div class="stat-value" id="statRevenue">—</div>
+          <div class="stat-sub">CFA (hors annulées)</div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title">Liste des commandes</div>
+          <div class="tabs">
+            <button class="tab active" onclick="filterOrders('all',this)">Toutes</button>
+            <button class="tab" onclick="filterOrders('pending',this)">En attente</button>
+            <button class="tab" onclick="filterOrders('confirmed',this)">Confirmées</button>
+            <button class="tab" onclick="filterOrders('delivered',this)">Livrées</button>
+            <button class="tab" onclick="filterOrders('cancelled',this)">Annulées</button>
+          </div>
+          <span class="result-count" id="tableCount">0 commande</span>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Client</th>
+                <th>Adresse</th>
+                <th>Bundle</th>
+                <th style="text-align:center">Qté</th>
+                <th>Montant</th>
+                <th>Statut</th>
+                <th>Changer statut</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="ordersBody">
+              <tr><td colspan="8"><div class="loading-state"><span class="spinner"></span> Chargement…</div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/admin.js">
+  
+</script>
+</body>
+</html>

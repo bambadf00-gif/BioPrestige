@@ -1,7 +1,13 @@
 // ────────────────────────────────────────────────────────────────────────
 // BioPrestige1 – Main JavaScript
-// CORRECTION : fetch vers Google Apps Script avec mode 'no-cors'
+// MISE À JOUR : envoi des commandes vers Supabase
 // ────────────────────────────────────────────────────────────────────────
+
+/* ---------------------------------------------------------------
+   Configuration Supabase
+   --------------------------------------------------------------- */
+const SUPABASE_URL = 'https://odmlmwpdtvavhucvgrza.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9kbWxtd3BkdHZhdmh1Y3ZncnphIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAxMzczODUsImV4cCI6MjA5NTcxMzM4NX0.OaAQdnYM8vBSNcz4-c3EH3-3XDz1qfdLOm8yFqoMNMQ'; // ← Clé anon depuis Paramètres → Clés API
 
 /* ---------------------------------------------------------------
    Navigation bar scroll handling
@@ -118,10 +124,8 @@ const isAddressValid = (a, n) => {
 };
 
 /* ---------------------------------------------------------------
-   ✅ Order form submission — envoi réel vers Google Sheets
+   ✅ Order form submission — envoi vers Supabase
    --------------------------------------------------------------- */
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw2RZTvYMMIbxZKqVu-AkDioZ1HSm40wa-fu5Ujwe1fk8mEAO1FffHmZkMKhIHGrXZI8w/exec';
-
 const submitBtn = document.getElementById('popupSubmit');
 submitBtn && submitBtn.addEventListener('click', async () => {
   const nom = document.getElementById('popup-nom').value.trim();
@@ -154,32 +158,40 @@ submitBtn && submitBtn.addEventListener('click', async () => {
   const bundle = sel ? sel.dataset.label : '1 Acheté = 1 Offert';
   const selectedQty = sel ? parseInt(sel.dataset.qty) * 2 : 2;
 
+  // Calculer le montant total selon le bundle
+  const totalAmount = sel ? parseInt(sel.dataset.price) : 14990;
+
   // Désactiver le bouton pendant l'envoi
   submitBtn.textContent = '⏳ Envoi en cours…';
   submitBtn.disabled = true;
 
   try {
-    const now = new Date();
-    const payload = {
-      date: now.toLocaleDateString('fr-FR'),
-      heure: now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }),
-      nom,
-      telephone: tel,
-      adresse,
-      bundle,
-      quantite: selectedQty,
-    };
-
-    // ✅ mode 'no-cors' — résout le CORS avec Google Apps Script
-    // La requête arrive bien dans Google Sheets même sans lire la réponse
-    await fetch(GOOGLE_SCRIPT_URL, {
+    // ✅ Envoi vers Supabase
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/orders`, {
       method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify(payload),
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        customer_name: nom,
+        customer_phone: tel,
+        address: adresse,
+        bundle: bundle,
+        quantity: selectedQty,
+        total_amount: totalAmount,
+        status: 'pending'
+      })
     });
 
-    // ✅ Fetch sans exception = commande envoyée avec succès
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Erreur Supabase');
+    }
+
+    // ✅ Succès
     document.getElementById('popupBody').innerHTML = `
       <div class="popup-success">
         <div class="icon">✅</div>
@@ -193,7 +205,6 @@ submitBtn && submitBtn.addEventListener('click', async () => {
     setTimeout(closePopup, 3200);
 
   } catch (err) {
-    // Erreur réseau réelle uniquement
     submitBtn.textContent = '✅  Valider ma commande';
     submitBtn.disabled = false;
     showToast('Erreur réseau. Vérifiez votre connexion ou contactez-nous sur WhatsApp.', 'error');
