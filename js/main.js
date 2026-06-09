@@ -101,7 +101,7 @@ function showToast(msg, type = 'error') {
   container.style.margin = '0.5rem 0';
   container.style.padding = '0.5rem 1rem';
   container.style.borderRadius = '0.375rem';
-  container.style.fontSize = '0.875rem';
+  container.style.fontSize = '0.875rem'; 
   container.style.fontWeight = '500';
   container.style.backgroundColor = type === 'error' ? '#fecaca' : '#bbf7d0';
   container.style.color = type === 'error' ? '#991b1b' : '#14532d';

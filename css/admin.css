@@ -145,7 +145,7 @@ body {
     padding: 10px 12px;
     background: var(--red-light);
     border: 1px solid #fca5a5;
-    border-radius: var(--radius);
+    border-radius: var(--radius);  
     color: var(--red);
     font-size: 13px;
     display: none;

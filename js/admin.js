@@ -9,7 +9,7 @@ function doLogin() {
   if (document.getElementById('passwordInput').value === ADMIN_PASS) {
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('dashboard').style.display = 'block';
-    loadOrders();
+    loadOrders(); 
   } else {
     document.getElementById('loginError').style.display = 'block';
     document.getElementById('passwordInput').value = '';
