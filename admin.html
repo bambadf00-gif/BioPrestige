@@ -12,24 +12,6 @@
 
 <body>
 
-  <!-- LOGIN -->
-  <div id="loginScreen">
-    <div class="login-wrap">
-      <div class="login-logo">
-        <div class="login-logo-icon">💜</div>
-        <h1>BioPrestige</h1> 
-        <p>Connectez-vous à votre espace admin</p>
-      </div>
-      <div class="login-card">
-        <label class="form-label">Mot de passe</label>
-        <input class="form-input" type="password" id="passwordInput" placeholder="Entrez votre mot de passe"
-          onkeydown="if(event.key==='Enter') doLogin()" autofocus />
-        <button class="btn-primary" onclick="doLogin()">Se connecter</button>
-        <div class="login-error" id="loginError">Mot de passe incorrect. Réessayez.</div>
-      </div>
-    </div>
-  </div>
-
   <!-- DASHBOARD -->
   <div id="dashboard">
     <aside class="sidebar">
@@ -39,10 +21,18 @@
       </div>
       <nav class="sidebar-nav">
         <div class="nav-section-label">Principal</div>
-        <a class="nav-link active">
-          <span class="icon">📋</span>
+        <a class="nav-link active" id="nav-accueil" onclick="switchView('accueil')">
+          <span class="icon">🏠</span>
+          <span>Accueil</span>
+        </a>
+        <a class="nav-link" id="nav-commandes" onclick="switchView('commandes')">
+          <span class="icon">📦</span>
           <span>Commandes</span>
           <span class="nav-badge" id="pendingBadge">0</span>
+        </a>
+        <a class="nav-link" id="nav-produits" onclick="switchView('produits')">
+          <span class="icon">🏷️</span>
+          <span>Produits</span>
         </a>
       </nav>
       <div class="sidebar-footer">
@@ -52,7 +42,6 @@
             <div class="user-name">Admin</div>
             <div class="user-role">Gérant</div>
           </div>
-          <button class="logout-btn" onclick="doLogout()" title="Déconnexion">↩</button>
         </div>
       </div>
     </aside>
@@ -60,89 +49,249 @@
     <div class="main">
       <div class="topbar">
         <div class="topbar-left">
-          <h2>Commandes</h2>
+          <h2 id="topbarTitle">Accueil</h2>
           <p id="lastUpdated">—</p>
         </div>
-        <button class="btn-outline" onclick="loadOrders()">↻ Actualiser</button>
+        <button class="btn-outline" onclick="refreshCurrentView()">↻ Actualiser</button>
       </div>
 
       <div class="content">
-        <div class="stats-row">
-          <div class="stat-card">
-            <div class="stat-header"><span class="stat-label">Total commandes</span>
-              <div class="stat-icon-wrap" style="background:#f5f3ff">📦</div>
-            </div>
-            <div class="stat-value" id="statTotal">—</div>
-            <div class="stat-sub">Toutes périodes</div>
+        <!-- VUE ACCUEIL -->
+        <div id="view-accueil" class="view-container active">
+          <!-- Filtres de l'accueil -->
+          <div class="filter-bar">
+            <select class="filter-select" id="timeframeFilter" onchange="loadHomeData()">
+              <option value="today">📅 Aujourd'hui</option>
+              <option value="yesterday">📅 Hier</option>
+              <option value="7days">📅 7 derniers jours</option>
+              <option value="30days">📅 30 derniers jours</option>
+              <option value="all" selected>📅 Tout le temps</option>
+            </select>
+            <select class="filter-select" id="channelFilter" onchange="loadHomeData()">
+              <option value="all">Tous les canaux ↕</option>
+              <option value="facebook">Facebook Ads ↕</option>
+              <option value="direct">Direct ↕</option>
+              <option value="whatsapp">WhatsApp ↕</option>
+            </select>
           </div>
-          <div class="stat-card">
-            <div class="stat-header"><span class="stat-label">En attente</span>
-              <div class="stat-icon-wrap" style="background:#fef3c7">⏳</div>
+
+          <!-- Statistiques de l'accueil -->
+          <div class="stats-row">
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="stat-label">Visites</span>
+                <div class="stat-icon-wrap" style="background:#e0f2fe">👁️</div>
+              </div>
+              <div class="stat-value" id="homeVisits">—</div>
+              <div class="stat-sub">Estimation sessions</div>
             </div>
-            <div class="stat-value" id="statPending">—</div>
-            <div class="stat-sub">À traiter</div>
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="stat-label">Ventes totales</span>
+                <div class="stat-icon-wrap" style="background:#ede9fe">💰</div>
+              </div>
+              <div class="stat-value" id="homeRevenue">—</div>
+              <div class="stat-sub">CFA (Livré uniquement)</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="stat-label">Commandes</span>
+                <div class="stat-icon-wrap" style="background:#f5f3ff">📦</div>
+              </div>
+              <div class="stat-value" id="homeOrders">—</div>
+              <div class="stat-sub">Commandes passées</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-header">
+                <span class="stat-label">Taux de conversion</span>
+                <div class="stat-icon-wrap" style="background:#d1fae5">🎯</div>
+              </div>
+              <div class="stat-value" id="homeConversion">—</div>
+              <div class="stat-sub">Ratio achats / visites</div>
+            </div>
           </div>
-          <div class="stat-card">
-            <div class="stat-header"><span class="stat-label">Livrées</span>
-              <div class="stat-icon-wrap" style="background:#d1fae5">✅</div>
+
+          <!-- Grille à deux colonnes pour meilleures ventes et commandes récentes -->
+          <div class="home-row-grid">
+            <!-- Performances des bundles -->
+            <div class="performance-card">
+              <div class="perf-title">
+                <span>Performances des Packs</span>
+                <span>Quantités vendues</span>
+              </div>
+              <div id="bundlePerformanceList">
+                <!-- Généré dynamiquement -->
+              </div>
             </div>
-            <div class="stat-value" id="statDelivered">—</div>
-            <div class="stat-sub">Complétées</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-header"><span class="stat-label">Revenus</span>
-              <div class="stat-icon-wrap" style="background:#ede9fe">💰</div>
+
+            <!-- Commandes récentes -->
+            <div class="performance-card" style="display: flex; flex-direction: column;">
+              <div class="perf-title">Commandes récentes</div>
+              <div class="table-container" style="flex-grow: 1;">
+                <table style="font-size: 12px;">
+                  <thead>
+                    <tr>
+                      <th>Client</th>
+                      <th>Bundle</th>
+                      <th>Montant</th>
+                      <th>Statut</th>
+                    </tr>
+                  </thead>
+                  <tbody id="recentOrdersBody">
+                    <!-- Généré dynamiquement -->
+                  </tbody>
+                </table>
+              </div>
             </div>
-            <div class="stat-value" id="statRevenue">—</div>
-            <div class="stat-sub">CFA (hors annulées)</div>
           </div>
         </div>
 
-        <div class="section-card">
-          <div class="section-header">
-            <div class="section-title">Liste des commandes</div>
-            <div class="tabs">
-              <button class="tab active" onclick="filterOrders('all',this)">Toutes</button>
-              <button class="tab" onclick="filterOrders('pending',this)">En attente</button>
-              <button class="tab" onclick="filterOrders('confirmed',this)">Confirmées</button>
-              <button class="tab" onclick="filterOrders('delivered',this)">Livrées</button>
-              <button class="tab" onclick="filterOrders('cancelled',this)">Annulées</button>
+        <!-- VUE COMMANDES -->
+        <div id="view-commandes" class="view-container">
+
+
+          <div class="section-card">
+            <div class="section-header">
+              <div class="section-title">Liste des commandes</div>
+              <div class="tabs">
+                <button class="tab active" onclick="filterOrders('all',this)">Toutes</button>
+                <button class="tab" onclick="filterOrders('pending',this)">En attente</button>
+                <button class="tab" onclick="filterOrders('confirmed',this)">Confirmées</button>
+                <button class="tab" onclick="filterOrders('delivered',this)">Livrées</button>
+                <button class="tab" onclick="filterOrders('cancelled',this)">Annulées</button>
+              </div>
+              <span class="result-count" id="tableCount">0 commande</span>
             </div>
-            <span class="result-count" id="tableCount">0 commande</span>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Client</th>
+                    <th>Adresse</th>
+                    <th>Bundle</th>
+                    <th style="text-align:center">Qté</th>
+                    <th>Montant</th>
+                    <th>Statut</th>
+                    <th>Changer statut</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody id="ordersBody">
+                  <tr>
+                    <td colspan="8">
+                      <div class="loading-state"><span class="spinner"></span> Chargement…</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-          <div class="table-container">
-            <table>
-              <thead>
-                <tr>
-                  <th>Client</th>
-                  <th>Adresse</th>
-                  <th>Bundle</th>
-                  <th style="text-align:center">Qté</th>
-                  <th>Montant</th>
-                  <th>Statut</th>
-                  <th>Changer statut</th>
-                  <th>Date</th>
-                </tr>
-              </thead>
-              <tbody id="ordersBody">
-                <tr>
-                  <td colspan="8">
-                    <div class="loading-state"><span class="spinner"></span> Chargement…</div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+        </div>
+
+        <!-- VUE PRODUITS -->
+        <div id="view-produits" class="view-container">
+          <div class="products-grid" id="productsGrid">
+            <!-- Les 3 bundles BioPrestige -->
+            <div class="product-card">
+              <div class="product-img-wrap">📦<span class="product-tag">Populaire</span></div>
+              <div class="product-info-body">
+                <div>
+                  <h4 class="product-name-title">1 Acheté = Livraison Gratuite</h4>
+                  <p class="product-desc">Offre découverte BioPrestige. Idéal pour commencer le traitement à base de Poudre d'Ube.</p>
+                </div>
+                <div class="product-meta-row">
+                  <span class="product-price-label">14 990 F CFA</span>
+                  <span class="product-sales-badge" id="sales-1">0 ventes</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <div class="product-img-wrap">🔥<span class="product-tag">Meilleur choix</span></div>
+              <div class="product-info-body">
+                <div>
+                  <h4 class="product-name-title">2 Achetés = 1 Offert</h4>
+                  <p class="product-desc">Notre offre la plus vendue. Idéal pour un traitement complet de detoxification et vitalité.</p>
+                </div>
+                <div class="product-meta-row">
+                  <span class="product-price-label">24 990 F CFA</span>
+                  <span class="product-sales-badge" id="sales-2">0 ventes</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="product-card">
+              <div class="product-img-wrap">👑<span class="product-tag">Pack Famille</span></div>
+              <div class="product-info-body">
+                <div>
+                  <h4 class="product-name-title">3 Achetés = 2 Offerts</h4>
+                  <p class="product-desc">Le traitement cure intense BioPrestige. Recommandé pour un partage familial ou longue durée.</p>
+                </div>
+                <div class="product-meta-row">
+                  <span class="product-price-label">32 990 F CFA</span>
+                  <span class="product-sales-badge" id="sales-3">0 ventes</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- MODAL DÉTAILS DE COMMANDE -->
+  <div class="modal-overlay" id="orderDetailModal" onclick="closeModal()">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="modalTitle">Détails de la commande</h3>
+        <button class="modal-close" onclick="closeModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-grid">
+          <div class="modal-item">
+            <span class="modal-label">Client</span>
+            <span class="modal-value" id="modalClientName">—</span>
+          </div>
+          <div class="modal-item">
+            <span class="modal-label">Téléphone</span>
+            <span class="modal-value" id="modalClientPhone">—</span>
+          </div>
+          <div class="modal-item full-width">
+            <span class="modal-label">Adresse de livraison</span>
+            <span class="modal-value" id="modalClientAddress">—</span>
+          </div>
+          <div class="modal-item">
+            <span class="modal-label">Bundle sélectionné</span>
+            <span class="modal-value" id="modalBundle">—</span>
+          </div>
+          <div class="modal-item">
+            <span class="modal-label">Quantité</span>
+            <span class="modal-value" id="modalQuantity">—</span>
+          </div>
+          <div class="modal-item">
+            <span class="modal-label">Montant Total</span>
+            <span class="modal-value highlight" id="modalTotalAmount">—</span>
+          </div>
+          <div class="modal-item">
+            <span class="modal-label">Statut Actuel</span>
+            <span class="modal-value" id="modalStatus">—</span>
+          </div>
+          <div class="modal-item full-width">
+            <span class="modal-label">Date et heure</span>
+            <span class="modal-value" id="modalDate">—</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-copy" id="btnCopyAddress" onclick="copyOrderDetails()">📋 Copier les infos</button>
+        <a href="#" target="_blank" class="btn-whatsapp" id="btnWhatsApp">💬 Contacter WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
   <div class="toast" id="toast"></div>
 
-  <script src="js/admin.js">
-
-  </script>
+  <script src="js/admin.js"></script>
 </body>
 
 </html>
