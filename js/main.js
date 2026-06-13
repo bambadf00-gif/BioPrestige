@@ -58,7 +58,7 @@ function selectBundle(el) {
   const popupLabel = document.getElementById('popupBundleLabel');
   const popupQty = document.getElementById('popupBundleQty');
   if (popupLabel) popupLabel.textContent = label;
-  if (popupQty) popupQty.textContent = `× ${qty * 2} sachets`;
+  if (popupQty) popupQty.textContent = `× ${qty * 2 - 1} sachets`;
 }
 
 /* ---------------------------------------------------------------
@@ -71,7 +71,7 @@ function openPopup() {
     const qty = parseInt(sel.dataset.qty);
     const label = sel.dataset.label;
     document.getElementById('popupBundleLabel').textContent = label;
-    document.getElementById('popupBundleQty').textContent = `× ${qty * 2} sachets`;
+    document.getElementById('popupBundleQty').textContent = `× ${qty * 2 - 1} sachets`;
   }
   overlay && overlay.classList.add('visible');
   document.body.style.overflow = 'hidden';
@@ -155,8 +155,8 @@ submitBtn && submitBtn.addEventListener('click', async () => {
 
   // Bundle sélectionné
   const sel = document.querySelector('.bundle-card.selected');
-  const bundle = sel ? sel.dataset.label : '1 Acheté = 1 Offert';
-  const selectedQty = sel ? parseInt(sel.dataset.qty) * 2 : 2;
+  const bundle = sel ? sel.dataset.label : '1 Acheté = 0 Offert';
+  const selectedQty = sel ? parseInt(sel.dataset.qty) * 2 - 1 : 1;
 
   // Calculer le montant total selon le bundle
   const totalAmount = sel ? parseInt(sel.dataset.price) : 14990;
