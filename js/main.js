@@ -191,13 +191,13 @@ submitBtn && submitBtn.addEventListener('click', async () => {
       throw new Error(errorData.message || 'Erreur Supabase');
     }
 
-    fbq('track', 'Purchase', {
-      value: totalAmount,
-      currency: 'XOF',
-      content_name: bundle,
-      content_ids: ['bioprestige_ube'],
-      num_items: selectedQty
-    });
+    // fbq('track', 'Purchase', {
+    //   value: totalAmount,
+    //   currency: 'XOF',
+    //   content_name: bundle,
+    //   content_ids: ['bioprestige_ube'],
+    //   num_items: selectedQty
+    // });
 
     // ✅ Succès
     document.getElementById('popupBody').innerHTML = `
