@@ -28,6 +28,7 @@ function closeMobile() {
   mobileMenu && mobileMenu.classList.add('hidden');
 }
 
+
 /* ---------------------------------------------------------------
    Image gallery (thumbnail interaction)
    --------------------------------------------------------------- */
@@ -159,7 +160,7 @@ submitBtn && submitBtn.addEventListener('click', async () => {
   const selectedQty = sel ? parseInt(sel.dataset.qty) * 2 - 1 : 1;
 
   // Calculer le montant total selon le bundle
-  const totalAmount = sel ? parseInt(sel.dataset.price) : 14990;
+  const totalAmount = sel ? parseInt(sel.dataset.price) : 9990;
 
   // Désactiver le bouton pendant l'envoi
   submitBtn.textContent = '⏳ Envoi en cours…';
