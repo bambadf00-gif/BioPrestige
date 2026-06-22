@@ -157,10 +157,10 @@ submitBtn && submitBtn.addEventListener('click', async () => {
   // Bundle sélectionné
   const sel = document.querySelector('.bundle-card.selected');
   const bundle = sel ? sel.dataset.label : '1 Acheté = 0 Offert';
-  const selectedQty = sel ? parseInt(sel.dataset.qty) * 2 - 1 : 1;
+  const selectedQty = sel ? parseInt(sel.dataset.qty) * 2 - 1 : 1;    
 
   // Calculer le montant total selon le bundle
-  const totalAmount = sel ? parseInt(sel.dataset.price) : 9990;
+  const totalAmount = sel ? parseInt(sel.dataset.price) : 9900;
 
   // Désactiver le bouton pendant l'envoi
   submitBtn.textContent = '⏳ Envoi en cours…';
